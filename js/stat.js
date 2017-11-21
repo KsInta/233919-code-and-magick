@@ -21,21 +21,33 @@ window.renderStatistics = function(ctx, names, times) {
   var initialX = 120;
   var initialY = 250;
 
-  ctx.fillStyle = 'rgba(0,0,0,0.7)';
-  ctx.fillRect(110, 20, 420, 270);
-  ctx.fillStyle = 'rgb(255,255,255)';
-  ctx.fillRect(100, 10, 420, 270);
+  var drawRectangle = function(rectangleInitialX, rectangleInitialY, width, height) {
+    ctx.fillRect(rectangleInitialX, rectangleInitialY, width, height);
+  };
+
+  var chooseTextColor = function(color1, color2) {
+    ctx.fillStyle = (names[i] === 'Вы') ? color1 : color2;
+  };
+
+  var writeText = function(text, textInitialX, textInitialY) {
+    ctx.fillText(text, textInitialX, textInitialY);
+  };
+
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+  drawRectangle(110, 20, 420, 270);
+  ctx.fillStyle = 'rgb(255, 255, 255)';
+  drawRectangle(100, 10, 420, 270);
 
   ctx.fillStyle = '#000';
   ctx.font = '16px PT Mono';
-  ctx.fillText('Ура вы победили!', 120, 40);
-  ctx.fillText('Список результатов:', 120, 60);
+  writeText('Ура вы победили!', 120, 40);
+  writeText('Список результатов:', 120, 60);
 
   for (var i = 0; i < times.length; i++) {
-    ctx.fillStyle = (names[i] === 'Вы') ? 'rgba(255, 0, 0, 1)' : 'rgba(0, 0, 255, ' + Math.random() + ')';
-    ctx.fillRect(initialX + (barWidth + barIndent) * i, initialY - times[i] * step, barWidth, times[i] * step);
+    chooseTextColor('rgba(255, 0, 0, 1)', 'rgba(0, 0, 255, ' + Math.random() + ')');
+    drawRectangle(initialX + (barWidth + barIndent) * i, initialY - times[i] * step, barWidth, times[i] * step);
     ctx.fillStyle = '#000';
-    ctx.fillText(names[i], initialX + (barWidth + barIndent) * i, initialY + 20);
-    ctx.fillText(Math.floor(times[i]), initialX + (barWidth + barIndent) * i, initialY - times[i] * step - 10);
+    writeText(names[i], initialX + (barWidth + barIndent) * i, initialY + 20);
+    writeText(Math.floor(times[i]), initialX + (barWidth + barIndent) * i, initialY - times[i] * step - 10);
   }
 };
