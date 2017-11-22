@@ -1,6 +1,6 @@
 'use strict';
 
-var getMaxElement = function(array) {
+var getMaxElement = function (array) {
   var max = 0;
 
   for (var i = 0; i < array.length; i++) {
@@ -13,7 +13,7 @@ var getMaxElement = function(array) {
   return max;
 };
 
-window.renderStatistics = function(ctx, names, times) {
+window.renderStatistics = function (ctx, names, times) {
   var histogramHeight = 150;
   var step = histogramHeight / (getMaxElement(times) - 0);
   var barWidth = 40;
@@ -21,15 +21,15 @@ window.renderStatistics = function(ctx, names, times) {
   var initialX = 120;
   var initialY = 250;
 
-  var drawRectangle = function(rectangleInitialX, rectangleInitialY, width, height) {
+  var drawRectangle = function (rectangleInitialX, rectangleInitialY, width, height) {
     ctx.fillRect(rectangleInitialX, rectangleInitialY, width, height);
   };
 
-  var chooseTextColor = function(color1, color2) {
+  var chooseTextColor = function (color1, color2) {
     ctx.fillStyle = (names[i] === 'Вы') ? color1 : color2;
   };
 
-  var writeText = function(text, textInitialX, textInitialY) {
+  var writeText = function (text, textInitialX, textInitialY) {
     ctx.fillText(text, textInitialX, textInitialY);
   };
 
